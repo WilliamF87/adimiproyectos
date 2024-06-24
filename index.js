@@ -14,20 +14,24 @@ dotenv.config();
 conectarBD();
 
 // Configuración del CORS
-const whiteList = [process.env.FRONTED_URL];
+// const whiteList = [process.env.FRONTED_URL];
+
+// const corsOptions = {
+//     origin: function(origin, callback) {
+//         if(whiteList.includes(origin)) {
+//             // Puede consultar la API
+//             callback(null, true);
+//             // Le damos el acceso con el true
+//         } else {
+//             // No está permitido
+//             callback(new Error("Error de Cors"));
+//         }
+//     }
+// };
 
 const corsOptions = {
-    origin: function(origin, callback) {
-        if(whiteList.includes(origin)) {
-            // Puede consultar la API
-            callback(null, true);
-            // Le damos el acceso con el true
-        } else {
-            // No está permitido
-            callback(new Error("Error de Cors"));
-        }
-    }
-};
+    origin: process.env.FRONTEND_URL
+}
 
 app.use(cors(corsOptions));
 
