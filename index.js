@@ -8,14 +8,13 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
-// Permite que la app procese la inofmación de tipo json
 
 dotenv.config();
 
 conectarBD();
 
-// Configurar CORS
-const whiteList = [process.env.FRONTED_URL, process.env.FRONTED_URL_2];
+// Configuración del CORS
+const whiteList = [process.env.FRONTED_URL];
 
 const corsOptions = {
     origin: function(origin, callback) {
@@ -38,14 +37,11 @@ app.use("/api/proyectos", proyectoRoutes);
 app.use("/api/tareas", tareaRoutes);
 
 const PORT = process.env.PORT || 4000;
-// Esta variable de entorno se va a crear en el servidor de producción automaticamente
-// En caso de que no exista (cuando estamos en local) se le asiga el puerto 4000
 
 const servidor = app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
-// Socket.io (los import pueden ir arriba)
 import { Server } from "socket.io";
 
 const io = new Server(servidor, {
@@ -56,20 +52,15 @@ const io = new Server(servidor, {
 });
 
 io.on("connection", (socket) => {
-    // console.log("Conectado a Socket.io");
-    // emit es para crear el evento y on es qué voy a hacer cuando ese evento ocurra
 
     // Definir los eventos de socket io
     socket.on("abrir proyecto", (proyecto) => {
         socket.join(proyecto);
-        // join: cuando los usuario entran a proyecto, cada uno entra a un socket diferente
-        // Es como si cada uno entrara a un cuarto diferente
     });
     
     socket.on("nueva tarea", tarea => {
         const proyecto = tarea.proyecto;
         socket.to(proyecto).emit("tarea agregada", tarea);
-        // socket.to(proyecto): emite el evento a los usuarios que se encuentren en ese proyecto (in o to son iguales)
     });
 
     socket.on("eliminar tarea", tarea => {

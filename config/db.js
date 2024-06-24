@@ -5,9 +5,12 @@ const conectarBD = async () => {
     const password = process.env.PASSWORD;
     const db = process.env.DB;
 
+    console.log(`USER: ${user}`);
+    console.log(`PASSWORD: ${password}`);
+    console.log(`DB: ${db}`)
+
     try {
         const connection = await mongoose.connect(
-            // `mongodb+srv://${user}:${password}@cluster0.2r9dx.mongodb.net/${db}?retryWrites=true&w=majority`,
             `mongodb+srv://${user}:${password}@cluster0.huenyqh.mongodb.net/${db}`,
             {
                 useNewUrlParser: true,
@@ -20,8 +23,6 @@ const conectarBD = async () => {
     } catch (error) {
         console.log(`error: ${error.message}`);
         process.exit(1);
-        // process.exit(1): va a terminar los procesos en caso de que la app no se pueda conectar a la BD
-        // 0 es un código de éxito y 1 un código de error. Normalmente Node termina sus procesos con 0
     }
 }
 
