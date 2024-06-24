@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamF87/proyectos_react.git"
+  },
+  "keywords": [
+    "MERN",
+    "Node"
+  ],
+  "author": "William Fernando Rosero A.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilliamF87/proyectos_react/issues"
+  },
+  "homepage": "https://github.com/WilliamF87/proyectos_react#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.0",
+    "nodemailer": "^6.9.14",
+    "socket.io": "^4.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
